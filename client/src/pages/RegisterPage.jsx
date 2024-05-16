@@ -22,6 +22,7 @@ export default function RegisterPage(){
             alert('Registration failed. Please try again later');
         }
     }
+    
     return (
         <div className="mt-4 grow flex items-center justify-around">
             <div className="mb-64">

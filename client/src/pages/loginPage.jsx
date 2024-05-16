@@ -21,7 +21,6 @@ export default function LoginPage(){
     if(redirect){
         return <Navigate to={'/'} />
     }
-
     return (
         <div className="mt-4 grow flex items-center justify-around">
             <div className="mb-64">
