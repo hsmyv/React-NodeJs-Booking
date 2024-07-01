@@ -92,7 +92,7 @@ export default function PlacesFormPage(){
 
                         {preInput('Photos', 'More == better')}
                 
-                        <PhotosUploader/>
+                        <PhotosUploader addedPhotos={addedPhotos} onChange={setAddedPhotos}/>
                         {preInput('Description', 'Description of the places')}
                         <textarea value={description} onChange={ev => setDescription(ev.target.value)}/>
 
