@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import BookingWidget from "../BookingWidget";
 
 export default function PlacePage(){
     const {id} = useParams();
@@ -27,7 +28,7 @@ export default function PlacePage(){
                 
                 <div className="bg-black p-8 grid gap-4">
                 <div >
-                    <h2 className="text-3xl">Photos of {place.title}</h2>
+                    <h2 className="text-3xl mr-48">Photos of {place.title}</h2>
                     <button onClick={() => setShowAllPhotos(false)} className="fixed right-12 top-8 flex gap-1 py-2 px-4 rounded-2xl shadow shadow-black bg-white text-black">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
@@ -49,7 +50,7 @@ export default function PlacePage(){
     }
 
     return (
-                <div className="mt-4 bg-gray-100 -mx-8 px-8 py-8">
+                <div className="mt-4 bg-gray-100 -mx-8 px-8 pt-8">
                             <h1 className="text-3xl">{place.title}</h1>
                             <a  className="flex gap-1 my-3 block font-semibold underline" target="_blank" href={'https://maps.google.com/?q=' + place.address}>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -66,17 +67,17 @@ export default function PlacePage(){
                                 <div>
                                     {place.photos?.[0] && (
                                         <div>
-                                            <img className="aspect-square object-cover" src={'http://localhost:4000/' + place.photos?.[0]} />
+                                            <img onClick={() => setShowAllPhotos(true)} className="aspect-square cursor-pointer object-cover" src={'http://localhost:4000/' + place.photos?.[0]} />
                                         </div>
                                     )}
                                 </div>
                                 <div className="grid">
                                     {place.photos?.[0] && (
-                                        <img className="aspect-square object-cover" src={'http://localhost:4000/' + place.photos?.[1]} />
+                                        <img onClick={() => setShowAllPhotos(true)} className="aspect-square cursor-pointer object-cover" src={'http://localhost:4000/' + place.photos?.[1]} />
                                         )}
                                         <div className="overflow-hidden">
                                             {place.photos?.[0] && (
-                                        <img className="aspect-square object-cover relative top-2" src={'http://localhost:4000/' + place.photos?.[2]} />
+                                        <img onClick={() => setShowAllPhotos(true)} className="aspect-square cursor-pointer object-cover relative top-2" src={'http://localhost:4000/' + place.photos?.[2]} />
                                             )}
                                         </div>
                                 </div>
@@ -89,33 +90,26 @@ export default function PlacePage(){
                             Show more photos
                             </button>
                         </div>
-                        <div className="my-4">
-                            <h2 className="font-semibold text-2xl">Description</h2>
-                            {place.description}
-                        </div>
-                        <div className="grid grid-cols-2">
+                        
+                        <div className="mt-8 mb-8 grid gap-8 grid-cols-1 md:grid-cols-[2fr_1fr]">
                             <div>
+                                <div className="my-4">
+                                    <h2 className="font-semibold text-2xl">Description</h2>
+                                    {place.description}
+                                </div>
                                 Check-in: {place.checkIn} <br/>
                                 Check-out: {place.checkOut} <br/>
                                 Max number of guests: {place.maxGuests} <br/>
                             </div>
                             <div>
-                                <div className="bg-white shadow p-4 rounded-2xl">
-                                    <div className="text-2xl text-center">
-                                    Price: ${place.price} / per night
-                                    </div>
-                                    <div className="border py-4 px-4 rounded-2xl">
-                                        <label>Check in:</label>
-                                        <input type="date" />
-                                    </div>
-                                    <div className="border py-4 px-4 rounded-2xl">
-                                        <label>Check out:</label>
-                                        <input type="date" />
-                                    </div>
-                                    <button className="primary mt-4">Book this place</button>
-
-                                </div>
+                                <BookingWidget place={place} />
                             </div>
+                        </div>
+                        <div className="bg-white -mx-8 px-8 py-8 border-t">
+                            <div>
+                                <h2 className="font-semibold text-2xl">Extra info</h2>
+                            </div>
+                            <div className="mb-4 mt-2 text-sm text-gray-700 leading-5">{place.extraInfo}</div>
                         </div>
                         </div>
 
