@@ -3,8 +3,10 @@ import AccountNav from "../AccountNav";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import PlaceImg from "../PlaceImg";
+import Perks from "../Perks";
 
 export default function PlacesPage(){
+    const [perks, setPerks] = useState([]);
     const [places, setPlaces] = useState([]);
     useEffect(() => {
         axios.get('/user-places').then(({data}) => {
@@ -27,13 +29,19 @@ export default function PlacesPage(){
                 <div className="mt-4"> 
                     {places.length > 0 && places.map(place => (
                         <Link to={'/account/places/' + place._id} className="flex cursor-pointer gap-4 bg-gray-100 p-4 rounded-2xl">
-                            <div className="flex w-32 h-32 bg-gray-300 grow shrink-0">
+                            <div className="flex w-32 h-30 bg-gray-300 grow shrink-0 rounded-2xl">
                                 <PlaceImg place={place}/>
                             </div>
                             <div className="grow-0 shrink">
                                 <h2 className="text-xl">{place.title}</h2>
                             <p className="text-sm mt-2"> {place.description}</p>
+                                <div className="grid mt-6 gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+                                        <Perks selected={place.perks} onChange={setPerks}/>
                             </div>
+                      
+                            
+                            </div>
+                                                    
                             
                             
                         </Link>
