@@ -23,8 +23,10 @@ function App() {
   return (
     <UserContextProvider>
        <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<IndexPage/>} />
+        <Route path="/" element={<Layout isIndex={true} />}>
+          <Route index element={<IndexPage />} />
+        </Route>
+        <Route path="/" element={<Layout />}>
         <Route path='/login' element={<LoginPage/>}/>
         <Route path='/register' element={<RegisterPage/>}/>
         <Route path='/account' element={<ProfilePage/>}/>

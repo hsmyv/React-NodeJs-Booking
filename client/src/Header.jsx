@@ -1,28 +1,32 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "./UserContext";
 import { Link } from 'react-router-dom';
 
 export default function Header(){
     const {user} = useContext(UserContext);
+    const [isFocused, setIsFocused] = useState(false);
+
     return (
         <header className='flex justify-between'>
         <Link to={'/'} className="flex items-center gap-1">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
-            </svg>
-            <span className="font-bold text-xl">airbnb</span>
-        </Link>
-        <div className="flex gap-2 border border-gray-300 rounded-full py-2 px-4 shadow-md shadow-gray-300">
-            <div>Anywhere</div>
-            <div className="border-l border-gray-300"></div>
-            <div>Any week</div>
-            <div className="border-l border-gray-300"></div>
-            <div>Add guests</div>
-            <button className="bg-primary text-white p-1 rounded-full">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-            <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-8 text-blue-700">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205 3 1m1.5.5-1.5-.5M6.75 7.364V3h-3v18m3-13.636 10.5-3.819" />
             </svg>
 
+            <span className="font-bold text-xl">Crystal Estate</span>
+        </Link>
+        <div className="flex border border-gray-300 rounded-full py-2 px-5 shadow-md shadow-gray-300">
+        <input
+        type="text"
+        className={`bg-gray-200 transition-all duration-300`}
+        style={{ width: isFocused ? '23rem' : '15rem' }}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+      />
+            <button className="bg-primary text-white p-1 px-5 rounded-full ml-4">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7">
+            <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+            </svg>
             </button>
         </div>
         <Link to={user?'/account':'/login'}
