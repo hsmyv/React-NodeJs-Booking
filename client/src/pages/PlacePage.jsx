@@ -17,7 +17,16 @@ return;
 }
 axios.get(`/place/${id}`).then(response => {
 setPlace(response.data);
-setLoading(false);
+setLoading(
+    
+
+
+
+
+
+
+    
+);
       })
       .catch(() => setLoading(false)); 
 
